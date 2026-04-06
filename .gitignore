@@ -1,0 +1,17 @@
+.hlx/*
+coverage/*
+logs/*
+node_modules/*
+
+helix-importer-ui
+.DS_Store
+*.bak
+.idea
+.playwright-mcp
+.wrangler
+
+# Ensure these files are tracked
+!CLAUDE.md
+!AGENTS.md
+tasks/lessons.md
+tasks/todo.md
