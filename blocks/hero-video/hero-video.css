@@ -1,0 +1,61 @@
+/* Hero Video – full-width dark section with quote overlay */
+
+.hero-video-container .hero-video-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-video {
+  position: relative;
+  padding: 60px 24px;
+  min-height: 400px;
+  background-color: #000;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video > div > div {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Hide the raw video URL link */
+.hero-video > div:first-child {
+  display: none;
+}
+
+.hero-video p {
+  font-family: var(--font-family-serif, Georgia, serif);
+  font-size: var(--body-font-size-m, 1.125rem);
+  font-style: italic;
+  line-height: 1.8;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+.hero-video picture {
+  display: block;
+  max-width: 200px;
+  margin: 16px auto 0;
+}
+
+.hero-video img {
+  width: 100%;
+  height: auto;
+  filter: invert(1);
+}
+
+@media (width >= 900px) {
+  .hero-video {
+    padding: 100px 32px;
+    min-height: 500px;
+  }
+
+  .hero-video p {
+    font-size: var(--body-font-size-l, 1.25rem);
+  }
+}
