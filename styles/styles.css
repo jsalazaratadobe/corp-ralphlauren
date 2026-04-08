@@ -44,17 +44,24 @@
   /* color scheme */
   color-scheme: light dark;
 
-  /* heritage palette */
-  --color-rust: #a14f2b;
-  --color-gold: #c5a059;
-  --color-parchment: #f5f2ed;
-  --color-ink: #1a1a1a;
+  /* Ralph Lauren corporate palette */
+  --color-navy: #031e3a;
+  --color-navy-light: #0a3a6b;
+  --color-gold: #8b6914;
+  --color-gold-light: #a07b1a;
+  --color-parchment: #f5f5f5;
+  --color-ink: #031e3a;
 
-  /* heritage dark palette */
-  --color-obsidian: #060d0d;
-  --color-card-dark: #162121;
-  --color-rust-bright: #d16a3e;
-  --color-muted: #8b9a9a;
+  /* dark palette */
+  --color-obsidian: #031e3a;
+  --color-card-dark: #0a2a4a;
+  --color-text-secondary: #363638;
+  --color-text-muted: #6d6f73;
+
+  /* legacy aliases */
+  --color-rust: var(--color-navy);
+  --color-rust-bright: var(--color-navy-light);
+  --color-muted: var(--color-text-muted);
 
   /* color tokens – grays and palette */
   --color-gray-100: #f1f1f1;
