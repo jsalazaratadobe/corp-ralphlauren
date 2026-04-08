@@ -60,6 +60,28 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Cards News",
+          "id": "cards-news",
+          "model": "cards-news",
+          "plugins": {
+            "da": {
+              "name": "cards-news",
+              "rows": 3,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div>div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div>div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "model": "cards",
@@ -93,6 +115,40 @@
                 {
                   "name": "text",
                   "selector": "div:nth-child(2)"
+                },
+                {
+                  "name": "classes_text-top",
+                  "selector": ""
+                },
+                {
+                  "name": "classes_text-center",
+                  "selector": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Carousel Brands",
+          "id": "carousel-brands",
+          "model": "carousel-brands",
+          "plugins": {
+            "da": {
+              "name": "carousel-brands",
+              "rows": 5,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "media_image",
+                  "selector": "div>div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "media_imageAlt",
+                  "selector": "div>div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "content_text",
+                  "selector": "div>div:nth-child(2)"
                 }
               ]
             }
@@ -205,6 +261,58 @@
                 {
                   "name": "urlText",
                   "selector": "div>div>p>a"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero Overlay",
+          "id": "hero-overlay",
+          "model": "hero-overlay",
+          "plugins": {
+            "da": {
+              "name": "hero-overlay",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero Video",
+          "id": "hero-video",
+          "model": "hero-video",
+          "plugins": {
+            "da": {
+              "name": "hero-video",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)>div"
                 }
               ]
             }

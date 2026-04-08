@@ -25,9 +25,21 @@
     ]
   },
   {
+    "id": "cards-news",
+    "components": [
+      "card-news"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "carousel-brands",
+    "components": [
+      "carousel-brands-item"
     ]
   },
   {

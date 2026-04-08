@@ -1,0 +1,57 @@
+{
+  "definitions": [
+    {
+      "title": "Carousel Brands",
+      "id": "carousel-brands",
+      "model": "carousel-brands",
+      "plugins": {
+        "da": {
+          "name": "carousel-brands",
+          "rows": 5,
+          "columns": 2,
+          "fields": [
+            { "name": "media_image", "selector": "div>div:nth-child(1)>picture>img[src]" },
+            { "name": "media_imageAlt", "selector": "div>div:nth-child(1)>picture>img[alt]" },
+            { "name": "content_text", "selector": "div>div:nth-child(2)" }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "carousel-brands-item",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "media_image",
+          "label": "Background Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "media_imageAlt",
+          "value": "",
+          "label": "Background Alt"
+        },
+        {
+          "component": "richtext",
+          "name": "content_text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "carousel-brands",
+      "components": [
+        "carousel-brands-item"
+      ]
+    }
+  ]
+}

@@ -44,17 +44,24 @@
   /* color scheme */
   color-scheme: light dark;
 
-  /* heritage palette */
-  --color-rust: #a14f2b;
-  --color-gold: #c5a059;
-  --color-parchment: #f5f2ed;
-  --color-ink: #1a1a1a;
+  /* Ralph Lauren corporate palette */
+  --color-navy: #031e3a;
+  --color-navy-light: #0a3a6b;
+  --color-gold: #8b6914;
+  --color-gold-light: #a07b1a;
+  --color-parchment: #f5f5f5;
+  --color-ink: #031e3a;
 
-  /* heritage dark palette */
-  --color-obsidian: #060d0d;
-  --color-card-dark: #162121;
-  --color-rust-bright: #d16a3e;
-  --color-muted: #8b9a9a;
+  /* dark palette */
+  --color-obsidian: #031e3a;
+  --color-card-dark: #0a2a4a;
+  --color-text-secondary: #363638;
+  --color-text-muted: #6d6f73;
+
+  /* legacy aliases for backwards compatibility */
+  --color-rust: var(--color-navy);
+  --color-rust-bright: var(--color-navy-light);
+  --color-muted: var(--color-text-muted);
 
   /* color tokens – grays and palette */
   --color-gray-100: #f1f1f1;
@@ -110,8 +117,8 @@
   --color-dark: rgb(0 0 0);
   --color-text: light-dark(var(--color-ink), var(--color-parchment));
   --color-link: light-dark(var(--color-ink), var(--color-parchment));
-  --color-link-hover: light-dark(var(--color-rust), var(--color-gold));
-  --color-brand: var(--color-rust);
+  --color-link-hover: light-dark(var(--color-navy-light), var(--color-gold));
+  --color-brand: var(--color-navy);
   --color-accent: var(--color-gold);
   --color-shaded: light-dark(var(--color-parchment), var(--color-card-dark));
 
@@ -153,15 +160,15 @@
   --link-color: var(--color-link);
   --link-hover-color: var(--color-link-hover);
 
-  /* heritage border */
-  --border-heritage: 2px solid light-dark(rgb(161 79 43 / 20%), rgb(245 242 237 / 20%));
-  --border-radius-heritage: 24px;
+  /* corporate border */
+  --border-heritage: 1px solid light-dark(rgb(3 30 58 / 15%), rgb(245 245 245 / 15%));
+  --border-radius-heritage: 0;
 
-  /* gradient and glow tokens */
-  --gradient-brand: linear-gradient(135deg, var(--color-rust) 0%, var(--color-gold) 100%);
-  --gradient-brand-dark: linear-gradient(135deg, var(--color-rust-bright) 0%, var(--color-gold) 100%);
-  --shadow-glow-rust: 0 0 40px rgb(161 79 43 / 30%);
-  --shadow-glow-gold: 0 0 40px rgb(197 160 89 / 25%);
+  /* gradient and shadow tokens */
+  --gradient-brand: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
+  --gradient-brand-dark: linear-gradient(135deg, var(--color-navy-light) 0%, var(--color-gold) 100%);
+  --shadow-glow-rust: 0 0 40px rgb(3 30 58 / 20%);
+  --shadow-glow-gold: 0 0 40px rgb(139 105 20 / 20%);
   --shadow-lift-m: 0 20px 40px -8px rgb(0 0 0 / 15%);
   --shadow-lift-l: 0 30px 60px -12px rgb(0 0 0 / 22%);
 
@@ -257,7 +264,7 @@ html {
 }
 
 ::selection {
-  background: light-dark(rgb(161 79 43 / 20%), rgb(197 160 89 / 30%));
+  background: light-dark(rgb(3 30 58 / 20%), rgb(139 105 20 / 30%));
   color: inherit;
 }
 
@@ -306,7 +313,7 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 500;
+  font-weight: 400;
   line-height: var(--heading-line-height);
   scroll-margin: 40px;
 }
@@ -381,7 +388,7 @@ a:any-link {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
-  text-decoration-color: light-dark(rgb(26 26 26 / 30%), rgb(245 242 237 / 30%));
+  text-decoration-color: light-dark(rgb(3 30 58 / 25%), rgb(245 245 245 / 25%));
   overflow-wrap: break-word;
 }
 
@@ -405,19 +412,19 @@ button.button {
   gap: var(--space-xs);
   max-width: 100%;
   margin: 0;
-  border: 1px solid light-dark(var(--color-rust), var(--color-rust-bright));
-  border-radius: 4px;
-  padding: 20px 50px;
+  border: 1px solid light-dark(var(--color-navy), var(--color-navy-light));
+  border-radius: 0;
+  padding: 16px 32px;
   font: inherit;
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-weight: 500;
+  font-size: 0.7rem;
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  background-color: light-dark(var(--color-rust), var(--color-rust-bright));
-  background-image: linear-gradient(135deg, rgb(255 255 255 / 12%), rgb(0 0 0 / 8%));
+  letter-spacing: 1px;
+  background-color: light-dark(var(--color-navy), var(--color-navy-light));
+  background-image: none;
   color: var(--color-light);
   cursor: pointer;
   overflow: hidden;
@@ -458,8 +465,8 @@ button.button:hover,
 button.button:focus-visible {
   background-color: var(--color-gold);
   border-color: var(--color-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px light-dark(rgb(161 79 43 / 30%), rgb(209 106 62 / 35%)), 0 0 0 1px var(--color-gold);
+  transform: none;
+  box-shadow: none;
   cursor: pointer;
   text-decoration: none;
 }
@@ -501,9 +508,9 @@ button.button:disabled:focus-visible {
 
 a.button.secondary,
 button.button.secondary {
-  border: 1.5px solid var(--color-rust);
+  border: 1.5px solid var(--color-navy);
   background-color: transparent;
-  color: var(--color-rust);
+  color: var(--color-navy);
 }
 
 a.button.secondary:hover,
@@ -511,10 +518,10 @@ a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
   border-color: var(--color-gold);
-  background-color: light-dark(rgb(197 160 89 / 8%), rgb(197 160 89 / 12%));
+  background-color: transparent;
   color: var(--color-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px light-dark(rgb(197 160 89 / 18%), rgb(197 160 89 / 22%));
+  transform: none;
+  box-shadow: none;
 }
 
 /* main content area – use design tokens for rhythm */

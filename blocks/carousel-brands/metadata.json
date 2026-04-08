@@ -1,0 +1,39 @@
+{
+  "variantName": "carousel-brands",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-04-08T19:07:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://corporate.ralphlauren.com/",
+    "originPage": "corporate homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "brand-showcase",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + brand name link per slide",
+    "buttonCount": 5,
+    "imageCount": 5
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "brand showcase carousels",
+      "product category sliders",
+      "image gallery with labels"
+    ],
+    "notSuitableFor": [
+      "text-heavy carousels",
+      "testimonial sliders",
+      "single-image heroes"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-08T19:07:00.000Z"
+  }
+}
