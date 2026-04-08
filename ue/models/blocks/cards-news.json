@@ -1,0 +1,49 @@
+{
+  "definitions": [
+    {
+      "title": "Cards News",
+      "id": "cards-news",
+      "model": "cards-news",
+      "plugins": {
+        "da": {
+          "name": "cards-news",
+          "rows": 3,
+          "columns": 2,
+          "fields": [
+            { "name": "image", "selector": "div>div:nth-child(1)>picture>img[src]" },
+            { "name": "text", "selector": "div>div:nth-child(2)" }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "card-news",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards-news",
+      "components": [
+        "card-news"
+      ]
+    }
+  ]
+}

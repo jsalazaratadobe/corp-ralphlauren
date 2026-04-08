@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://corporate.ralphlauren.com/",
+  "path": "index",
+  "timestamp": "2026-04-08T19:27:11.098Z",
+  "title": "Ralph Lauren Corporation",
+  "template": "corporate-homepage",
+  "blocks": [
+    "hero-video",
+    "hero-overlay",
+    "hero-overlay",
+    "hero-overlay",
+    "hero-overlay",
+    "carousel-brands",
+    "cards-news"
+  ]
+}

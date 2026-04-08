@@ -1,0 +1,106 @@
+/* Hero Overlay – full-width image with text overlay and CTA */
+
+.hero-overlay-container .hero-overlay-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-overlay {
+  position: relative;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Background image */
+.hero-overlay > div:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-overlay > div:first-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 30%), rgb(0 0 0 / 60%));
+}
+
+.hero-overlay picture,
+.hero-overlay > div:first-child p {
+  display: block;
+  height: 100%;
+  margin: 0;
+}
+
+.hero-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text overlay content */
+.hero-overlay > div:last-child {
+  position: relative;
+  z-index: 1;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.hero-overlay > div:last-child > div {
+  max-width: 600px;
+}
+
+.hero-overlay h2 {
+  font-family: var(--font-family-serif, Georgia, serif);
+  font-size: var(--heading-font-size-l, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  margin: 0 0 16px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.hero-overlay p {
+  color: rgb(255 255 255 / 90%);
+  font-size: var(--body-font-size-s, 0.875rem);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.hero-overlay a {
+  display: inline-block;
+  background-color: var(--color-navy, #031e3a);
+  color: #fff;
+  padding: 16px 32px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: background-color 0.3s;
+}
+
+.hero-overlay a:hover {
+  background-color: var(--color-gold, #8b6914);
+}
+
+@media (width >= 900px) {
+  .hero-overlay {
+    min-height: 500px;
+  }
+
+  .hero-overlay > div:last-child {
+    padding: 60px 48px;
+  }
+
+  .hero-overlay h2 {
+    font-size: var(--heading-font-size-xl, 2.5rem);
+  }
+}

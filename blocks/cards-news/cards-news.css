@@ -1,0 +1,86 @@
+/* Cards News – news article listing */
+
+.cards-news > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.cards-news > ul > li {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.cards-news > ul > li:last-child {
+  border-bottom: none;
+}
+
+.cards-news .cards-news-card-image {
+  flex: 0 0 120px;
+  line-height: 0;
+}
+
+.cards-news .cards-news-card-image picture,
+.cards-news .cards-news-card-image img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  display: block;
+}
+
+.cards-news .cards-news-card-body {
+  flex: 1;
+}
+
+.cards-news .cards-news-card-body h3 {
+  font-size: var(--body-font-size-s, 0.875rem);
+  font-weight: 600;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.cards-news .cards-news-card-body h3 a {
+  color: var(--text-color, #000);
+  text-decoration: none;
+}
+
+.cards-news .cards-news-card-body h3 a:hover {
+  text-decoration: underline;
+}
+
+.cards-news .cards-news-card-body p {
+  font-size: var(--body-font-size-xs, 0.75rem);
+  color: #666;
+  margin: 0 0 4px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.cards-news .cards-news-card-body p a {
+  color: #8b6914;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cards-news .cards-news-card-body p a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .cards-news .cards-news-card-image {
+    flex: 0 0 180px;
+  }
+
+  .cards-news .cards-news-card-image picture,
+  .cards-news .cards-news-card-image img {
+    width: 180px;
+    height: 120px;
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-overlay",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-04-08T19:07:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://corporate.ralphlauren.com/",
+    "originPage": "corporate homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "image-overlay-teaser",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "full-width image with text overlay",
+      "corporate section teasers",
+      "landing page content blocks with background images"
+    ],
+    "notSuitableFor": [
+      "text-only hero sections",
+      "video backgrounds",
+      "card-style layouts"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-08T19:07:00.000Z"
+  }
+}

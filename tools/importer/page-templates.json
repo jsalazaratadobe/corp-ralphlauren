@@ -1,0 +1,117 @@
+{
+  "templates": [
+    {
+      "name": "corporate-homepage",
+      "urls": [
+        "https://corporate.ralphlauren.com/"
+      ],
+      "description": "Ralph Lauren corporate homepage with company overview, news, and investor information",
+      "blocks": [
+        {
+          "name": "hero-video",
+          "instances": [
+            "div.hero"
+          ]
+        },
+        {
+          "name": "hero-overlay",
+          "instances": [
+            "div.cid_homepage-company-bucket section.img-link",
+            "div.cid_homepage-careers-bucket section.img-link",
+            "div.cid_homepage-citizenship-bucket section.img-link",
+            "div.cid_homepage-investors-bucket section.img-link"
+          ]
+        },
+        {
+          "name": "carousel-brands",
+          "instances": [
+            "div.cid_homepage-brands-carousel section.fullbleed"
+          ]
+        },
+        {
+          "name": "cards-news",
+          "instances": [
+            "div.corp-news-hp"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": "div.hero",
+          "style": null,
+          "blocks": [
+            "hero-video"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Our Company",
+          "selector": "div.cid_homepage-company-bucket",
+          "style": null,
+          "blocks": [
+            "hero-overlay"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Brands",
+          "selector": "div.cid_homepage-brands-carousel",
+          "style": null,
+          "blocks": [
+            "carousel-brands"
+          ],
+          "defaultContent": [
+            "h2.section-header"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "Careers",
+          "selector": "div.cid_homepage-careers-bucket",
+          "style": null,
+          "blocks": [
+            "hero-overlay"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5",
+          "name": "Citizenship and Sustainability",
+          "selector": "div.cid_homepage-citizenship-bucket",
+          "style": null,
+          "blocks": [
+            "hero-overlay"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6",
+          "name": "Investor Relations",
+          "selector": "div.cid_homepage-investors-bucket",
+          "style": null,
+          "blocks": [
+            "hero-overlay"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-7",
+          "name": "Latest From RL Newsroom",
+          "selector": "div.home-page-news",
+          "style": null,
+          "blocks": [
+            "cards-news"
+          ],
+          "defaultContent": [
+            "h2.widget-title",
+            "div.corp-news-more-btn"
+          ]
+        }
+      ]
+    }
+  ]
+}
