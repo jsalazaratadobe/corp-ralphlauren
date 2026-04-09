@@ -6,14 +6,14 @@ header {
   --header-drop-shadow: none;
   --header-drop-border: transparent;
 
-  /* typography: brand (strongest) > primary nav > dropdown headings > dropdown items */
-  --nav-brand-size: 1.7rem;
-  --nav-brand-weight: 700;
-  --nav-primary-size: 0.8rem;
-  --nav-primary-weight: 700;
+  /* typography: RL corporate style */
+  --nav-brand-size: 1.5rem;
+  --nav-brand-weight: 400;
+  --nav-primary-size: 11px;
+  --nav-primary-weight: 400;
   --nav-heading-size: var(--body-font-size-s);
   --nav-heading-weight: 700;
-  --nav-item-size: var(--body-font-size-s);
+  --nav-item-size: 11px;
   --nav-item-weight: 400;
 
   /* spacing: use space tokens */
@@ -22,21 +22,21 @@ header {
   --nav-item-padding: var(--space-m);
   --nav-dropdown-padding: var(--space-m);
   --nav-dropdown-item-padding: var(--space-s) var(--space-m);
-  --nav-dropdown-offset: var(--space-s);
-  --nav-radius: var(--space-s);
+  --nav-dropdown-offset: 0px;
+  --nav-radius: 0;
 
   /* backgrounds */
   --nav-bg: var(--background-color);
-  --nav-bg-hover: var(--header-hover-bg);
-  --nav-bg-link-hover: var(--header-link-hover-bg);
-  --nav-bg-dropdown: light-dark(var(--background-color), var(--color-card-dark));
+  --nav-bg-hover: transparent;
+  --nav-bg-link-hover: transparent;
+  --nav-bg-dropdown: light-dark(#fff, var(--color-card-dark));
   --nav-bg-dropdown-mobile: light-dark(var(--color-gray-100), var(--color-card-dark));
-  --nav-bg-mega: light-dark(var(--color-parchment), var(--color-obsidian));
+  --nav-bg-mega: light-dark(#fff, var(--color-obsidian));
   --nav-bg-hover-item: light-dark(var(--light-color), var(--color-card-dark));
 
-  /* header uses neutral hover color */
-  --nav-hover-color: light-dark(var(--color-rust), var(--color-gold));
-  --nav-focus-color: light-dark(var(--color-rust), var(--color-gold));
+  /* RL corporate navy hover */
+  --nav-hover-color: light-dark(var(--color-navy, #031e3a), var(--color-gold));
+  --nav-focus-color: light-dark(var(--color-navy, #031e3a), var(--color-gold));
 
   /* desktop-only (overridden in @media 900px) */
   --nav-desktop-max-width: 1264px;
@@ -50,15 +50,35 @@ header {
 }
 
 header .nav-wrapper {
-  background-color: light-dark(#faf8f5, var(--color-obsidian));
+  background-color: light-dark(#fff, var(--color-obsidian));
   width: 100%;
   z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  border-bottom: var(--border-heritage);
+  border-bottom: 1px solid light-dark(#ebebf0, rgb(255 255 255 / 10%));
   box-shadow: none;
+}
+
+/* stock ticker */
+header .nav-stock-ticker {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--body-font-family);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+header .nav-stock-ticker .stock-exchange {
+  font-weight: 600;
+}
+
+header .nav-stock-ticker .stock-price {
+  font-weight: 400;
 }
 
 /* mobile: base layout */
@@ -185,12 +205,13 @@ header .nav-brand {
   justify-content: center;
   justify-self: stretch;
   min-width: 0;
-  font-family: var(--font-family-serif);
+  font-family: var(--heading-font-family);
   font-size: var(--nav-brand-size);
   font-weight: var(--nav-brand-weight);
   line-height: 1;
-  letter-spacing: -0.5px;
-  color: light-dark(var(--color-rust), var(--color-rust-bright));
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--text-color);
 }
 
 header nav .nav-brand a:any-link {
@@ -234,6 +255,7 @@ header nav .nav-sections ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  font-family: var(--body-font-family);
   font-size: var(--nav-primary-size);
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -249,32 +271,100 @@ header nav .nav-sections ul {
     max-height: calc(var(--nav-open-height, 100dvh) - var(--nav-height));
   }
 
-  header nav .nav-sections ul,
+  /* RL mobile: left-aligned, normal case, serif font */
+  header nav .nav-sections ul {
+    font-family: var(--heading-font-family);
+    font-size: 16px;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    text-align: left;
+  }
+
+  /* Equal row height for ALL top-level items */
   header nav .nav-sections .default-content-wrapper > ul > li,
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
-    text-align: center;
+  header nav .nav-sections div > ul > li {
+    text-align: left;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > p {
-    justify-content: center;
+  /* Items with <p> wrapper (dropdown parents) */
+  header nav .nav-sections .default-content-wrapper > ul > li > p,
+  header nav .nav-sections div > ul > li > p {
+    justify-content: flex-start;
+    padding: 18px var(--nav-item-padding);
+    min-height: 56px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > p > a {
-    justify-content: center;
-    text-align: center;
+  /* Items with bare <a> (no dropdown) — match same padding */
+  header nav .nav-sections .default-content-wrapper > ul > li > a,
+  header nav .nav-sections div > ul > li > a {
+    display: flex;
+    align-items: center;
+    padding: 18px var(--nav-item-padding);
+    min-height: 56px;
+    font-family: var(--heading-font-family);
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+  }
+
+  /* Links inside <p> wrappers */
+  header nav .nav-sections .default-content-wrapper > ul > li > p > a,
+  header nav .nav-sections div > ul > li > p > a {
+    justify-content: flex-start;
+    text-align: left;
+    font-family: var(--heading-font-family);
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+  }
+
+  /* RL mobile sub-items: indented like original (padding-left ~40px) */
+  header nav .nav-sections .default-content-wrapper > ul > li > ul,
+  header nav .nav-sections div > ul > li > ul {
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 0 40px;
+    margin: 0;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul a,
+  header nav .nav-sections div > ul > li > ul a {
+    font-family: var(--heading-font-family);
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    padding: 16px 0;
+    display: block;
+    border-bottom: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul li:last-child a,
+  header nav .nav-sections div > ul > li > ul li:last-child a {
+    border-bottom: none;
   }
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li {
+header nav .nav-sections .default-content-wrapper > ul > li,
+header nav .nav-sections div > ul > li {
   font-weight: var(--nav-primary-weight);
   border-bottom: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li:last-child {
+header nav .nav-sections .default-content-wrapper > ul > li:last-child,
+header nav .nav-sections div > ul > li:last-child {
   border-bottom: 0;
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li > p {
+header nav .nav-sections .default-content-wrapper > ul > li > p,
+header nav .nav-sections div > ul > li > p {
   margin: 0;
   padding: var(--nav-item-padding);
   position: relative;
@@ -283,24 +373,28 @@ header nav .nav-sections .default-content-wrapper > ul > li > p {
   align-items: center;
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li.nav-drop {
+header nav .nav-sections .default-content-wrapper > ul > li.nav-drop,
+header nav .nav-sections div > ul > li.nav-drop {
   cursor: pointer;
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > a {
+header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > a,
+header nav .nav-sections div > ul > li.nav-drop > p > a {
   flex: 1;
   min-height: 44px;
   display: flex;
   align-items: center;
 }
 
-/* chevron: mobile only (p::after); desktop uses li::after below */
+/* chevron: mobile only — RL style right-pointing > arrow */
 @media (width <= 899px) {
-  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p {
-    padding-right: calc(var(--nav-item-padding) + 26px);
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p,
+  header nav .nav-sections div > ul > li.nav-drop > p {
+    padding-right: calc(var(--nav-item-padding) + 30px);
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > .nav-submenu-toggle {
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > .nav-submenu-toggle,
+  header nav .nav-sections div > ul > li.nav-drop > p > .nav-submenu-toggle {
     position: absolute;
     right: var(--nav-item-padding);
     top: 50%;
@@ -308,29 +402,31 @@ header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > a {
     height: 24px;
     transform: translateY(-50%);
     border: 0;
-    border-radius: 999px;
+    border-radius: 0;
     background: transparent;
     color: inherit;
     padding: 0;
     cursor: pointer;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > .nav-submenu-toggle::before {
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > .nav-submenu-toggle::before,
+  header nav .nav-sections div > ul > li.nav-drop > p > .nav-submenu-toggle::before {
     content: '';
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     margin: auto;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-    opacity: 0.6;
-    transform: rotate(135deg);
+    border: 1.5px solid currentcolor;
+    border-radius: 0;
+    border-width: 0 1.5px 1.5px 0;
+    opacity: 0.5;
+    transform: rotate(-45deg);
     transition: transform 0.2s ease;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop[aria-expanded='true'] > p > .nav-submenu-toggle::before {
-    transform: rotate(-45deg);
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop[aria-expanded='true'] > p > .nav-submenu-toggle::before,
+  header nav .nav-sections div > ul > li.nav-drop[aria-expanded='true'] > p > .nav-submenu-toggle::before {
+    transform: rotate(45deg);
   }
 }
 
@@ -340,14 +436,16 @@ header nav .nav-sections .default-content-wrapper > ul > li > p > a {
   text-decoration: none;
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li > ul {
+header nav .nav-sections .default-content-wrapper > ul > li > ul,
+header nav .nav-sections div > ul > li > ul {
   display: none;
   padding: 0 var(--nav-dropdown-padding) var(--nav-dropdown-padding);
   margin: 0;
   border-radius: var(--nav-radius);
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul,
+header nav .nav-sections div > ul > li[aria-expanded='true'] > ul {
   display: block;
 }
 
@@ -533,23 +631,20 @@ header nav .nav-sections button.button:focus-visible {
 
 /* CTA button in header tools */
 header nav .nav-tools a.button:any-link:not(.nav-tool) {
-  border: 1.5px solid var(--color-rust);
-  border-radius: 4px;
+  border: 1.5px solid var(--color-navy, #031e3a);
+  border-radius: 0;
   background: transparent;
-  color: var(--color-rust);
-  padding: 12px 24px;
-  font-size: 0.75rem;
-  font-weight: 700;
+  color: var(--color-navy, #031e3a);
+  padding: 10px 20px;
+  font-size: 0.65rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   transition: all 0.3s;
 }
 
 header nav .nav-tools a.button.nav-auth-link:any-link {
-  padding: 10px 14px;
-  min-height: 36px;
-  line-height: 1;
-  white-space: nowrap;
+  display: none;
 }
 
 header nav .nav-auth-link .nav-auth-info {
@@ -567,6 +662,11 @@ header nav .nav-auth-link .nav-auth-info {
   text-transform: none;
 }
 
+header nav .nav-sections .default-content-wrapper > ul > li.nav-auth-mobile-item,
+header nav .nav-sections div > ul > li.nav-auth-mobile-item {
+  display: none;
+}
+
 header nav .nav-sections .default-content-wrapper > ul > li.nav-auth-mobile-item > p > a {
   display: block;
   color: inherit;
@@ -579,7 +679,7 @@ header nav .nav-sections .default-content-wrapper > ul > li.nav-auth-mobile-item
 }
 
 header nav .nav-tools a.button:any-link:not(.nav-tool):hover {
-  background: var(--color-rust);
+  background: var(--color-navy, #031e3a);
   color: var(--color-light);
   transform: none;
   box-shadow: none;
@@ -822,56 +922,107 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
 
 /* desktop: 900px */
 @media (width >= 900px) {
-  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > .nav-submenu-toggle {
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > .nav-submenu-toggle,
+  header nav .nav-sections div > ul > li.nav-drop > p > .nav-submenu-toggle {
     display: none;
   }
 
   header nav {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template:
+      'ticker brand tools' auto
+      'sections sections sections' auto / auto 1fr auto;
     align-items: center;
-    gap: 0 var(--space-xl);
+    gap: 0;
     max-width: var(--nav-desktop-max-width);
     margin: 0 auto;
     padding: 0 var(--space-xl);
-    min-height: var(--nav-height);
+    min-height: auto;
   }
 
   header {
     --nav-padding: var(--space-xl);
+    --nav-height: auto;
   }
 
-  /* brand: left, no shrink */
+  /* stock ticker: top-left */
+  header .nav-stock-ticker {
+    display: flex;
+    grid-area: ticker;
+    justify-self: start;
+    padding: 20px 0;
+  }
+
+  /* brand: top-center */
   header .nav-brand {
-    flex: 0 0 auto;
-    flex-basis: 150px;
+    grid-area: brand;
+    justify-content: center;
+    padding: 20px 0;
+    font-size: 22px;
+    letter-spacing: 8px;
   }
 
-  /* sections: nav items flow from logo, horizontal nav with dropdowns */
+  /* sections: full-width second row, horizontal nav */
   header nav .nav-sections {
-    flex: 1 1 auto;
+    grid-area: sections;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     visibility: visible;
     padding: 0;
     white-space: nowrap;
+    border-top: 1px solid light-dark(#ebebf0, rgb(255 255 255 / 10%));
   }
 
   header nav .nav-sections .default-content-wrapper {
     width: 100%;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul {
+  header nav .nav-sections .default-content-wrapper > ul,
+  header nav .nav-sections ul:first-child {
     justify-content: flex-start;
     display: flex;
-    gap: var(--space-l);
+    flex-wrap: wrap;
+    gap: 0;
     margin: 0;
   }
 
-  /* tools: right, no shrink */
+  /* RL nav link spacing: works for both p > a (dropdowns) and bare a (simple links) */
+  header nav .nav-sections li > a,
+  header nav .nav-sections li > p > a {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px;
+    font-family: var(--body-font-family);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    min-height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  header nav .nav-sections li > a:hover,
+  header nav .nav-sections li > a:focus-visible,
+  header nav .nav-sections li > p > a:hover,
+  header nav .nav-sections li > p > a:focus-visible,
+  header nav .nav-sections li[aria-expanded='true'] > p > a {
+    font-weight: 700;
+    border-bottom-color: var(--color-navy, #031e3a);
+    color: inherit;
+    text-decoration: none;
+    background: transparent;
+  }
+
+  /* tools: top-right */
   header nav .nav-tools {
-    flex: 0 0 auto;
+    grid-area: tools;
+    justify-self: end;
+    padding: 20px 0;
   }
 
   header nav[aria-expanded='true'] {
@@ -888,7 +1039,8 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     align-self: unset;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li {
+  header nav .nav-sections .default-content-wrapper > ul > li,
+  header nav .nav-sections div > ul > li {
     position: relative;
     flex: 0 1 auto;
     display: inline-flex;
@@ -900,153 +1052,151 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     margin: 0;
     display: inline-flex;
     align-items: center;
-    min-height: var(--nav-height);
+    min-height: 50px;
     padding: 0;
-    font-size: var(--body-font-size-l);
-    font-weight: var(--nav-primary-weight);
-    letter-spacing: 0.01em;
+    font-family: var(--body-font-family);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > p > a {
-    padding: var(--space-xs) var(--space-s);
-    border-radius: var(--nav-radius);
+    padding: 14px 20px;
+    border-radius: 0;
     line-height: 1.2;
-    transition: color 0.18s ease, background-color 0.18s ease;
+    transition: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
   }
 
+  /* RL hover: bold text + navy underline */
   header nav .nav-sections .default-content-wrapper > ul > li > p > a:hover,
-  header nav .nav-sections .default-content-wrapper > ul > li > p > a:focus-visible {
-    color: var(--nav-hover-color);
-    background-color: var(--nav-bg-link-hover);
+  header nav .nav-sections .default-content-wrapper > ul > li > p > a:focus-visible,
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > p > a {
+    font-weight: 700;
+    border-bottom-color: var(--color-navy, #031e3a);
+    background-color: transparent;
+    color: inherit;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > p > a:focus-visible {
     outline: 2px solid var(--nav-focus-color);
-    outline-offset: 2px;
+    outline-offset: -2px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop) a:hover,
   header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop) a:focus-visible {
-    color: var(--nav-hover-color);
-    text-decoration: underline;
-    text-underline-offset: 0.35em;
-    text-decoration-thickness: 2px;
+    font-weight: 700;
+    color: inherit;
+    text-decoration: none;
   }
 
   header nav .nav-sections .nav-drop {
-    padding-right: var(--nav-item-padding);
+    padding-right: 0;
     cursor: pointer;
   }
 
   header nav .nav-sections .nav-drop:focus-within > p > a,
   header nav .nav-sections .nav-drop:hover > p > a {
-    background-color: var(--nav-bg-link-hover);
-    color: var(--nav-hover-color);
+    background-color: transparent;
+    font-weight: 700;
+    border-bottom-color: var(--color-navy, #031e3a);
+    color: inherit;
   }
 
+  /* Remove chevron arrows — RL doesn't use them */
   header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    right: var(--space-xs);
-    transform: translateY(-50%) rotate(135deg);
-    width: 5px;
-    height: 5px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-    transition: transform 0.2s ease;
-    opacity: 0.7;
+    display: none;
   }
 
-  header nav .nav-sections .nav-drop:hover::after,
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    transform: translateY(-50%) rotate(-45deg);
-    opacity: 1;
-  }
-
-  /* regular dropdown – desktop */
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul {
+  /* regular dropdown – desktop: RL style left-aligned panel */
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul {
     display: block;
     position: absolute;
-    top: calc(100% + var(--nav-dropdown-offset));
-    left: 50%;
-    transform: translate(-50%, -4px);
-    min-width: var(--nav-desktop-dropdown-min);
+    top: 100%;
+    left: 0;
+    transform: none;
+    min-width: 200px;
     width: max-content;
-    max-width: var(--nav-desktop-dropdown-max);
-    padding: var(--nav-gap);
-    border-radius: var(--nav-radius);
-    border: 1px solid var(--header-drop-border);
-    background-color: var(--nav-bg-dropdown);
-    box-shadow: var(--header-drop-shadow);
+    max-width: 300px;
+    padding: var(--space-l) var(--space-xl);
+    border-radius: 0;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
     white-space: initial;
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
     z-index: 8;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+    transition: opacity 0.15s ease, visibility 0s linear 0.15s;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega)[aria-expanded='true'] > ul {
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega)[aria-expanded='true'] > ul,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega)[aria-expanded='true'] > ul {
     visibility: visible;
     opacity: 1;
-    transform: translate(-50%, var(--space-xs));
     pointer-events: auto;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
+    transition: opacity 0.15s ease, visibility 0s;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul::before {
-    content: '';
-    position: absolute;
-    top: calc(-1 * var(--nav-desktop-arrow-size));
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: var(--nav-desktop-arrow-size) solid transparent;
-    border-right: var(--nav-desktop-arrow-size) solid transparent;
-    border-bottom: var(--nav-desktop-arrow-size) solid var(--nav-bg-dropdown);
+  /* No arrow on RL dropdown */
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul::before,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul::before {
+    display: none;
   }
 
-  /* invisible hover bridge above regular dropdown to prevent close on gap traversal */
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul::after {
+  /* invisible hover bridge */
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul::after,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul::after {
     content: '';
     position: absolute;
     bottom: 100%;
     left: 0;
     right: 0;
-    height: calc(var(--nav-dropdown-offset) + var(--space-m));
+    height: 4px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul > li {
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul > li,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul > li {
     padding: 0;
     border: 0;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul > li + li {
-    border-top: 1px solid var(--header-drop-border);
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul > li + li,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul > li + li {
+    border-top: none;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul a {
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul a,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul a {
     display: block;
-    padding: var(--nav-dropdown-item-padding);
-    border-radius: var(--nav-radius);
+    padding: 12px 0;
+    border-radius: 0;
     text-decoration: none;
-    transition: background-color 0.18s ease, color 0.18s ease;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: font-weight 0.1s ease;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul a:hover,
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul a:focus-visible {
-    background-color: var(--nav-bg-hover-item);
-    color: var(--nav-hover-color);
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul a:focus-visible,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul a:hover,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul a:focus-visible {
+    font-weight: 700;
+    background-color: transparent;
+    color: inherit;
     text-decoration: none;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul a:focus-visible {
+  header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop-mega) > ul a:focus-visible,
+  header nav .nav-sections div > ul > li:not(.nav-drop-mega) > ul a:focus-visible {
     outline: 2px solid var(--nav-focus-color);
-    outline-offset: -2px;
+    outline-offset: 2px;
   }
 
   /* mega menu – desktop: full-width panel, centered content */
@@ -1059,7 +1209,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     top: var(--mega-top, var(--nav-height, 64px));
     padding: var(--space-xl) var(--space-xl);
     border-bottom: var(--border-heritage);
-    background-color: light-dark(#faf8f5, var(--color-obsidian));
+    background-color: light-dark(#fff, var(--color-obsidian));
     color: var(--text-color);
     box-shadow: var(--header-drop-shadow);
     z-index: 999;

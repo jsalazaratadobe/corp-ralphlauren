@@ -104,3 +104,73 @@
     font-size: var(--heading-font-size-xl, 2.5rem);
   }
 }
+
+/* ==========================================================================
+   Stacked variant: image on top, text + button centered below
+   Author usage: Hero Overlay (stacked)
+   ========================================================================== */
+
+.hero-overlay.stacked {
+  min-height: auto;
+  color: var(--text-color, #031e3a);
+}
+
+/* Image: static, full-width, not absolute */
+.hero-overlay.stacked > div:first-child {
+  position: relative;
+  inset: auto;
+}
+
+.hero-overlay.stacked > div:first-child::after {
+  display: none;
+}
+
+.hero-overlay.stacked img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Text: below image, centered */
+.hero-overlay.stacked > div:last-child {
+  position: static;
+  z-index: auto;
+  padding: 32px 24px 40px;
+  text-align: center;
+  align-items: center;
+}
+
+.hero-overlay.stacked > div:last-child > div {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-overlay.stacked h2 {
+  color: var(--text-color, #031e3a);
+  font-style: italic;
+}
+
+.hero-overlay.stacked > div:last-child p {
+  color: var(--text-color, #031e3a);
+  opacity: 0.8;
+}
+
+.hero-overlay.stacked .button-container {
+  margin-top: 8px;
+}
+
+.hero-overlay.stacked > div:last-child a {
+  background-color: var(--color-navy, #031e3a);
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  .hero-overlay.stacked {
+    min-height: auto;
+  }
+
+  .hero-overlay.stacked > div:last-child {
+    padding: 40px 48px 56px;
+  }
+}

@@ -41,8 +41,8 @@
   --main-block-space: var(--space-l);
   --section-block-space: var(--space-l);
 
-  /* color scheme */
-  color-scheme: light dark;
+  /* color scheme – default light to match RL corporate; dark mode via toggle */
+  color-scheme: light;
 
   /* Ralph Lauren corporate palette */
   --color-navy: #031e3a;
@@ -153,7 +153,7 @@
   --header-height: var(--nav-height);
 
   /* boilerplate compatibility – map to design tokens */
-  --background-color: light-dark(var(--color-parchment), var(--color-obsidian));
+  --background-color: light-dark(#fff, var(--color-obsidian));
   --light-color: var(--color-shaded);
   --dark-color: var(--color-gray-500);
   --text-color: var(--color-text);
@@ -210,6 +210,8 @@
     --heading-font-size-xs: 18px;
     --content-padding-inline: var(--space-xl);
     --section-block-space: var(--space-3xl);
+    --nav-height: 115px;
+    --header-height: var(--nav-height);
   }
 }
 
@@ -524,6 +526,54 @@ button.button.secondary:focus-visible {
   box-shadow: none;
 }
 
+/* Tertiary button: RL-style uppercase underline link with centered decorative line
+   Light mode: dark text + dark underline. Dark mode: light text + light underline. */
+a.button.tertiary,
+button.button.tertiary {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: light-dark(var(--color-ink, #031e3a), var(--color-parchment, #f5f5f5));
+  padding: 0 0 8px;
+  min-width: 0;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+  display: inline-block;
+}
+
+a.button.tertiary::after,
+button.button.tertiary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 1px;
+  background-color: currentcolor;
+  transition: width 0.3s ease;
+}
+
+a.button.tertiary:hover,
+a.button.tertiary:focus-visible,
+button.button.tertiary:hover,
+button.button.tertiary:focus-visible {
+  background: transparent;
+  color: var(--text-color);
+  transform: none;
+  box-shadow: none;
+}
+
+a.button.tertiary:hover::after,
+a.button.tertiary:focus-visible::after,
+button.button.tertiary:hover::after,
+button.button.tertiary:focus-visible::after {
+  width: 100%;
+}
+
 /* main content area – use design tokens for rhythm */
 main > div {
   margin: var(--main-block-space) var(--content-padding-inline);
@@ -673,6 +723,21 @@ main > .section.ink {
 
 main > .section.ink * {
   color: var(--color-parchment);
+}
+
+/* Section heading style: centered serif italic (like RL "brands" heading) */
+main .section.centered > div {
+  text-align: center;
+}
+
+main .section.centered h2 {
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 20px;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  margin-bottom: var(--space-l);
 }
 
 /* gradient-text utility: apply to any heading or span for brand gradient text */
