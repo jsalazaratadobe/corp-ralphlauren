@@ -1,6 +1,10 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
+  // Strip button classes from DA processing
+  block.querySelectorAll('.button').forEach((btn) => btn.classList.remove('button'));
+  block.querySelectorAll('.button-container').forEach((bc) => bc.classList.remove('button-container'));
+
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');

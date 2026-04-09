@@ -330,20 +330,12 @@ h2 {
   letter-spacing: -0.015em;
 }
 
-h3 { font-size: var(--heading-font-size-m); }
-h4 { font-size: var(--heading-font-size-s); }
-h5 { font-size: var(--heading-font-size-xs); }
+h3 { font-size: var(--heading-font-size-l); }
+h4 { font-size: var(--heading-font-size-m); }
+h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
-@media (width >= 600px) {
-  h3 { font-size: var(--heading-font-size-l); }
-  h4 { font-size: var(--heading-font-size-m); }
-  h5 { font-size: var(--heading-font-size-s); }
-}
-
-@media (width >= 1200px) {
-  h3 { font-size: var(--heading-font-size-xl); }
-}
+/* Heading sizes are responsive via --heading-font-size-* variables in :root breakpoints */
 
 p,
 dl,
@@ -733,7 +725,6 @@ main .section.centered > div {
 main .section.centered h2 {
   font-family: var(--heading-font-family);
   font-weight: 400;
-  font-style: italic;
   font-size: 20px;
   text-transform: capitalize;
   letter-spacing: 0.3px;

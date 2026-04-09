@@ -231,7 +231,7 @@ header nav .nav-brand .icon.icon-logo {
   }
 
 header nav .nav-brand :is(img, svg) {
-  width: min(200px, 42vw);
+  width: min(400px, 42vw);
   height: 45px;
   object-fit: contain;
 }
@@ -1049,7 +1049,8 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     border-bottom: 0;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > p {
+  header nav .nav-sections .default-content-wrapper > ul > li > p,
+  header nav .nav-sections div > ul > li > p {
     margin: 0;
     display: inline-flex;
     align-items: center;

@@ -62,7 +62,6 @@
   font-family: var(--font-family-serif, Georgia, serif);
   font-size: var(--heading-font-size-l, 2rem);
   font-weight: 400;
-  font-style: italic;
   color: #fff;
   margin: 0 0 16px;
 }
@@ -148,7 +147,6 @@
 
 .hero-overlay.stacked h2 {
   color: var(--text-color, #031e3a);
-  font-style: italic;
 }
 
 .hero-overlay.stacked > div:last-child p {
