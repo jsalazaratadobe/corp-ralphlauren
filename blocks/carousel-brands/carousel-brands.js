@@ -1,3 +1,5 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
 function updateActiveSlide(slide) {
   const block = slide.closest('.carousel-brands');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
@@ -97,6 +99,10 @@ export default async function decorate(block) {
   block.setAttribute('role', 'region');
   block.setAttribute('aria-roledescription', 'Carousel');
 
+  // Strip button classes added by DA processing
+  block.querySelectorAll('.button').forEach((btn) => btn.classList.remove('button'));
+  block.querySelectorAll('.button-container').forEach((bc) => bc.classList.remove('button-container'));
+
   const container = document.createElement('div');
   container.classList.add('carousel-brands-slides-container');
 
@@ -139,6 +145,23 @@ export default async function decorate(block) {
 
   container.append(slidesWrapper);
   block.prepend(container);
+
+  // Optimize images for responsive delivery
+  block.querySelectorAll('img').forEach((img) => {
+    if (!img.src) return;
+    const pic = img.closest('picture');
+    const optimized = createOptimizedPicture(img.src, img.alt || '', false, [{ width: '750' }]);
+    if (pic) {
+      pic.replaceWith(optimized);
+    } else {
+      const p = img.closest('p');
+      if (p && p.children.length === 1) {
+        p.replaceWith(optimized);
+      } else {
+        img.replaceWith(optimized);
+      }
+    }
+  });
 
   if (!isSingleSlide) {
     bindEvents(block);

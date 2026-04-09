@@ -513,7 +513,7 @@ function syncMobileNavHeight(nav) {
   nav.style.setProperty('--nav-open-height', `${window.innerHeight}px`);
 }
 
-const NAV_ITEMS = '.default-content-wrapper > ul > li';
+const NAV_ITEMS = ':is(.default-content-wrapper, div) > ul > li';
 
 export default async function decorate(block) {
   const { body, eventRoot } = getBlockContext(block);
@@ -551,6 +551,13 @@ export default async function decorate(block) {
 
   nav.querySelector('.nav-brand .button')?.classList.remove('button');
   nav.querySelector('.nav-brand .button-container')?.classList.remove('button-container');
+
+  // Strip button classes from all nav-sections links (DA wraps links in <p> adding button class)
+  const navSections = nav.querySelector('.nav-sections');
+  if (navSections) {
+    navSections.querySelectorAll('.button').forEach((btn) => btn.classList.remove('button'));
+    navSections.querySelectorAll('.button-container').forEach((bc) => bc.classList.remove('button-container'));
+  }
 
   const sections = nav.querySelector('.nav-sections');
   sections?.querySelectorAll(NAV_ITEMS).forEach((li) => {
@@ -591,6 +598,26 @@ export default async function decorate(block) {
   wrapper.className = 'nav-wrapper';
   wrapper.append(nav);
   block.append(wrapper);
+
+  // Stock ticker – NYSE RL (desktop only, visible via CSS)
+  const brand = nav.querySelector('.nav-brand');
+  if (brand) {
+    const ticker = document.createElement('div');
+    ticker.className = 'nav-stock-ticker';
+    ticker.innerHTML = '<span class="stock-exchange">NYSE</span> <span class="stock-symbol">RL</span> <span class="stock-price"></span>';
+    brand.parentElement.insertBefore(ticker, brand);
+
+    // Fetch stock price via Finnhub (free, CORS-friendly)
+    fetch('https://finnhub.io/api/v1/quote?symbol=RL&token=demo')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        const price = data?.c;
+        if (price && price > 0) {
+          ticker.querySelector('.stock-price').textContent = `$${price.toFixed(2)}`;
+        }
+      })
+      .catch(() => { /* ticker stays without price */ });
+  }
 
   toggleMobile(nav, false, body);
   syncMobileNavHeight(nav);
