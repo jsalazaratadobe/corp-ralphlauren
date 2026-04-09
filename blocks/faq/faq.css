@@ -71,7 +71,6 @@ main .faq .faq-answer p {
 }
 
 main .faq .faq-empty {
-  font-style: italic;
   color: var(--color-muted);
 }
 
