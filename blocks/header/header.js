@@ -622,9 +622,20 @@ export default async function decorate(block) {
   toggleMobile(nav, false, body);
   syncMobileNavHeight(nav);
   collapseAll(nav);
-  DESKTOP.addEventListener('change', () => toggleMobile(nav, false, body));
+
+  // Sync header element height to match actual nav wrapper so content isn't hidden behind fixed nav
+  const syncHeaderHeight = () => {
+    const navWrapper = block.querySelector('.nav-wrapper');
+    if (navWrapper) {
+      block.closest('header').style.height = `${navWrapper.offsetHeight}px`;
+    }
+  };
+  syncHeaderHeight();
+
+  DESKTOP.addEventListener('change', () => { toggleMobile(nav, false, body); syncHeaderHeight(); });
   window.addEventListener('resize', () => {
     syncMobileNavHeight(nav);
+    syncHeaderHeight();
   });
 
   if (tools) {

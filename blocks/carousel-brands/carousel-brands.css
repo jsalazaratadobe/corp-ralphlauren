@@ -1,7 +1,8 @@
 /* Carousel Brands – horizontal brand showcase slider */
 
 .carousel-brands-container .carousel-brands-wrapper {
-  max-width: unset;
+  max-width: 1440px;
+  margin: 0 auto;
   padding: 0;
 }
 
