@@ -1,7 +1,8 @@
 /* Hero Overlay – full-width image with text overlay and CTA */
 
 .hero-overlay-container .hero-overlay-wrapper {
-  max-width: unset;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -127,8 +128,7 @@
 
 .hero-overlay.stacked img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 350px;
   object-fit: cover;
 }
 
@@ -168,6 +168,10 @@
 @media (width >= 900px) {
   .hero-overlay.stacked {
     min-height: auto;
+  }
+
+  .hero-overlay.stacked img {
+    height: 500px;
   }
 
   .hero-overlay.stacked > div:last-child {

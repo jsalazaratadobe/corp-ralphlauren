@@ -6,12 +6,16 @@ export default function decorate(block) {
     const li = document.createElement('li');
     while (row.firstElementChild) li.append(row.firstElementChild);
 
-    // Identify image vs body divs: check for img (with or without picture wrapper)
-    [...li.children].forEach((div) => {
+    // Identify image vs body divs
+    const divs = [...li.children];
+    divs.forEach((div, idx) => {
       const img = div.querySelector('img');
       const hasOnlyImage = img && div.querySelectorAll('h1, h2, h3, h4, h5, h6, a').length === 0;
       if (hasOnlyImage) {
         div.className = 'cards-news-card-image';
+      } else if (idx === 0 && !img && divs.length > 1) {
+        // First div with no image and no content = spacer for alignment
+        div.className = 'cards-news-card-image cards-news-card-spacer';
       } else {
         div.className = 'cards-news-card-body';
       }

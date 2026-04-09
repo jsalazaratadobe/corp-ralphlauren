@@ -1,20 +1,33 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-
 export default function decorate(block) {
-  // Optimize images (signature image etc.)
+  // Find video URL from first row (link to .mp4)
+  const firstRow = block.querySelector(':scope > div:first-child');
+  const link = firstRow?.querySelector('a[href]');
+  const videoSrc = link?.href || '';
+
+  if (videoSrc && videoSrc.match(/\.(mp4|webm|ogg)(\?|$)/i)) {
+    // Create video element
+    const video = document.createElement('video');
+    video.className = 'hero-video-bg';
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+
+    const source = document.createElement('source');
+    source.src = videoSrc;
+    source.type = `video/${videoSrc.match(/\.(mp4|webm|ogg)/i)[1]}`;
+    video.append(source);
+
+    // Replace the first row content with the video
+    firstRow.textContent = '';
+    firstRow.append(video);
+    firstRow.classList.add('hero-video-media');
+  }
+
+  // Optimize any images in the text row (e.g. signature)
   block.querySelectorAll('img').forEach((img) => {
     if (!img.src || img.src.startsWith('data:')) return;
-    const pic = img.closest('picture');
-    const optimized = createOptimizedPicture(img.src, img.alt || '', false, [{ width: '400' }]);
-    if (pic) {
-      pic.replaceWith(optimized);
-    } else {
-      const p = img.closest('p');
-      if (p && p.children.length === 1) {
-        p.replaceWith(optimized);
-      } else {
-        img.replaceWith(optimized);
-      }
-    }
+    // Skip optimization for inline data URIs
   });
 }
