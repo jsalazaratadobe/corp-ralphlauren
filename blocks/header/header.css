@@ -261,7 +261,7 @@ header nav .nav-sections ul {
   letter-spacing: 1.5px;
 }
 
-@media (width <= 899px) {
+@media (width <= 1079px) {
   header nav .nav-sections {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -387,7 +387,7 @@ header nav .nav-sections div > ul > li.nav-drop > p > a {
 }
 
 /* chevron: mobile only — RL style right-pointing > arrow */
-@media (width <= 899px) {
+@media (width <= 1079px) {
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p,
   header nav .nav-sections div > ul > li.nav-drop > p {
     padding-right: calc(var(--nav-item-padding) + 30px);
@@ -510,7 +510,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li:not(.nav-m
 }
 
 /* mobile: mega menu accordion – structure with .nav-mega-inner */
-@media (width <= 899px) {
+@media (width <= 1079px) {
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li.nav-mega-promo,
   header nav .nav-sections .default-content-wrapper > ul > li > ul > .nav-mega-inner > li.nav-mega-promo {
     display: none;
@@ -920,8 +920,8 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     }
   }
 
-/* desktop: 900px */
-@media (width >= 900px) {
+/* desktop: 1080px — raised to ensure all nav items fit in one line */
+@media (width >= 1080px) {
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > p > .nav-submenu-toggle,
   header nav .nav-sections div > ul > li.nav-drop > p > .nav-submenu-toggle {
     display: none;
@@ -936,7 +936,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     gap: 0;
     max-width: var(--nav-desktop-max-width);
     margin: 0 auto;
-    padding: 0 var(--space-xl);
+    padding: 0 var(--space-m);
     min-height: auto;
   }
 
@@ -982,7 +982,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
   header nav .nav-sections ul:first-child {
     justify-content: flex-start;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0;
     margin: 0;
   }
@@ -992,11 +992,11 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
   header nav .nav-sections li > p > a {
     display: inline-flex;
     align-items: center;
-    padding: 14px;
+    padding: 14px clamp(4px, 0.6vw, 12px);
     font-family: var(--body-font-family);
-    font-size: 10px;
+    font-size: clamp(8.5px, 0.75vw, 10px);
     font-weight: 400;
-    letter-spacing: 1.2px;
+    letter-spacing: clamp(0.5px, 0.08vw, 1.2px);
     text-transform: uppercase;
     text-decoration: none;
     border-bottom: 3px solid transparent;
@@ -1421,7 +1421,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
   }
 }
 
-@media (width <= 899px) {
+@media (width <= 1079px) {
   header nav .nav-tools .nav-auth-desktop {
     display: none;
   }
@@ -1466,15 +1466,31 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 1080px) {
   header nav .nav-sections .default-content-wrapper > ul > li.nav-auth-mobile-item {
     display: none;
   }
 }
 
-/* large screens: 1200px */
+/* larger screens: more padding between nav items */
 @media (width >= 1200px) {
   header nav {
-    max-width: 1264px;
+    max-width: 100%;
+    padding: 0 var(--space-xl);
+  }
+
+  header nav .nav-sections li > a,
+  header nav .nav-sections li > p > a {
+    padding: 14px 10px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (width >= 1400px) {
+  header nav .nav-sections li > a,
+  header nav .nav-sections li > p > a {
+    padding: 14px 16px;
+    letter-spacing: 1.2px;
   }
 }

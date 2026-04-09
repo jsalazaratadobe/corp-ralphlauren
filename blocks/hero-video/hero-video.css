@@ -1,4 +1,5 @@
-/* Hero Video – full-width dark section with quote overlay */
+/* Hero Video – full-width dark section with background video and quote overlay */
+/* stylelint-disable no-descending-specificity -- video media/text layers use intentional cascade */
 
 .hero-video-container .hero-video-wrapper {
   max-width: unset;
@@ -7,7 +8,6 @@
 
 .hero-video {
   position: relative;
-  padding: 60px 24px;
   min-height: 400px;
   background-color: #000;
   text-align: center;
@@ -16,20 +16,50 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.hero-video > div > div {
+/* Video background layer */
+.hero-video > div.hero-video-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-video .hero-video-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Dark overlay on video for text readability */
+.hero-video > div.hero-video-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 40%);
+}
+
+/* Fallback: hide raw link if JS hasn't converted to video yet */
+.hero-video > div:first-child:not(.hero-video-media) {
+  display: none;
+}
+
+/* Text overlay content (second row) */
+.hero-video > div:last-child {
+  position: relative;
+  z-index: 1;
+  padding: 60px 24px;
+}
+
+.hero-video > div:last-child > div {
   max-width: 700px;
   margin: 0 auto;
 }
 
-/* Hide the raw video URL link */
-.hero-video > div:first-child {
-  display: none;
-}
-
 .hero-video p {
-  font-family: var(--font-family-serif, Georgia, serif);
+  font-family: var(--heading-font-family, Georgia, serif);
   font-size: var(--body-font-size-m, 1.125rem);
   font-style: italic;
   line-height: 1.8;
@@ -51,11 +81,105 @@
 
 @media (width >= 900px) {
   .hero-video {
-    padding: 100px 32px;
     min-height: 500px;
+  }
+
+  .hero-video > div:last-child {
+    padding: 100px 32px;
   }
 
   .hero-video p {
     font-size: var(--body-font-size-l, 1.25rem);
+  }
+}
+
+/* ==========================================================================
+   Bottom variant: video on top, text centered below (like hero-overlay stacked)
+   Author usage: Hero Video (bottom)
+   ========================================================================== */
+
+.hero-video.bottom {
+  min-height: auto;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  color: light-dark(var(--color-ink, #031e3a), var(--color-parchment, #f5f5f5));
+  background-color: light-dark(#fff, var(--color-obsidian, #031e3a));
+}
+
+/* Video: static, not absolute */
+.hero-video.bottom > div.hero-video-media {
+  position: relative;
+  inset: auto;
+  height: 350px;
+}
+
+.hero-video.bottom > div.hero-video-media::after {
+  display: none;
+}
+
+/* Text: below video, centered — matches hero-overlay stacked */
+.hero-video.bottom > div:last-child {
+  padding: 32px 24px 40px;
+  text-align: center;
+}
+
+.hero-video.bottom > div:last-child > div {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-video.bottom h2 {
+  font-family: var(--heading-font-family, Georgia, serif);
+  font-size: var(--heading-font-size-l, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: light-dark(var(--color-ink, #031e3a), var(--color-parchment, #f5f5f5));
+  margin: 0 0 16px;
+}
+
+.hero-video.bottom p {
+  font-style: normal;
+  color: light-dark(var(--color-ink, #031e3a), var(--color-parchment, #f5f5f5));
+  opacity: 0.8;
+  font-size: var(--body-font-size-s, 0.875rem);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.hero-video.bottom .button-container {
+  margin-top: 8px;
+}
+
+.hero-video.bottom > div:last-child a {
+  display: inline-block;
+  background-color: light-dark(var(--color-navy, #031e3a), var(--color-parchment, #f5f5f5));
+  color: light-dark(#fff, var(--color-ink, #031e3a));
+  padding: 16px 32px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--body-font-family);
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: background-color 0.3s;
+}
+
+.hero-video.bottom > div:last-child a:hover {
+  background-color: var(--color-gold, #8b6914);
+}
+
+@media (width >= 900px) {
+  .hero-video.bottom > div.hero-video-media {
+    height: 500px;
+  }
+
+  .hero-video.bottom > div:last-child {
+    padding: 40px 48px 56px;
+  }
+
+  .hero-video.bottom h2 {
+    font-size: var(--heading-font-size-xl, 2.5rem);
   }
 }

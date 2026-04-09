@@ -1,9 +1,6 @@
 /* Cards News – news article listing, left-aligned */
 
-/* Override section centered for this block: left-align heading + content */
-.cards-news-container.centered > .default-content-wrapper {
-  text-align: left;
-}
+/* Heading stays centered from section-metadata; card content is left-aligned via .cards-news-card-body */
 
 /* Card list */
 .cards-news > ul {
@@ -42,6 +39,11 @@
   height: 75px;
   object-fit: cover;
   display: block;
+}
+
+/* No-image spacer: takes same width as image column for alignment */
+.cards-news .cards-news-card-spacer {
+  visibility: hidden;
 }
 
 /* Body: left-aligned always */

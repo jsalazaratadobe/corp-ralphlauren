@@ -14,7 +14,7 @@ import {
   getSessionState,
 } from '../../scripts/shared/auth-api.js';
 
-const DESKTOP = window.matchMedia('(min-width: 900px)');
+const DESKTOP = window.matchMedia('(min-width: 1080px)');
 const THEME_KEY = 'demo-theme';
 
 function getNavPath() {
