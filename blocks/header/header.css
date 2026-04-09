@@ -980,7 +980,8 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
 
   header nav .nav-sections .default-content-wrapper > ul,
   header nav .nav-sections ul:first-child {
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-wrap: nowrap;
     gap: 0;
